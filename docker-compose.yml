@@ -4,13 +4,16 @@ services:
   web:
     build:
       context: ./geodjango
-    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-    #command: gunicorn PostGIS.wsgi:application --bind 0.0.0.0:8000
-    #volumes:
-    #  - static_volume:/home/app/web/staticfiles
+    command: sh -c "python manage.py migrate && gunicorn geodjango.wsgi:application --bind 0.0.0.0:8000"
+    #command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
     restart: always
-    ports:
-      - 8000:8000
+    expose:
+      - 8000
+    # ports:
+    #   - 8000:8000
     env_file:
       - ./.env
     depends_on:
@@ -35,7 +38,19 @@ services:
       timeout: 5s
       retries: 5
 
+  nginx:
+    image: nginx:1.27.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+
 
 volumes:
   db_data:
-  #static_volume:
+  static_volume:
+  media_volume:
