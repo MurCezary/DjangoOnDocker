@@ -1,5 +1,5 @@
 # GeoDjango
-This setup allows you to quickly set up a development environment for a Django project using Docker. The stack includes:
+This repository allows you to quickly set up a development environment for a Django project using Docker. The stack includes:
 - Django (backend)
 - PostgreSQL (database)
 - Nginx (reverse proxy)
@@ -37,11 +37,7 @@ POSTGRES_ENGINE=django.db.backends.postgresql
 POSTGRES_DB=postgis_db
 POSTGRES_USER=app
 POSTGRES_PASSWORD=password_to_db
-POSTGRES_HOST=db
-POSTGRES_PORT=5432
-DJANGO_SUPERUSER_USERNAME=your_admin
-DJANGO_SUPERUSER_PASSWORD=your_admin_password
-DJANGO_SUPERUSER_EMAIL=your_admin_mail
+...
 ```
 6. Build and run the application using Docker Compose::
 ```
@@ -52,9 +48,14 @@ This will:
 Build the necessary Docker images for Django, PostgreSQL, and Nginx.
 Start all services as defined in the docker-compose.yml.
 
-9. Once the application is running, you can access Django at http://localhost:80 or the port set in your nginx/nginx.conf file on line: listen 80;.
+9. Once the application is running, you can access Django at
+```
+http://localhost:80
+```
+or the port set in your nginx/nginx.conf file on line: listen 80;.
+The Superuser account is automatically created based on the data provided in the .env file.
 
-10. To stop and remove the running containers use:
+12. To stop and remove the running containers use:
 ```
 docker-compose down
 ```
