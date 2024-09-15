@@ -54,8 +54,7 @@ Start all services as defined in the docker-compose.yml.
 
 9. Once the application is running, you can access Django at http://localhost:80 or the port set in your nginx/nginx.conf file on line: listen 80;.
 
-10. Stopping the Application
-To stop and remove the running containers:
+10. To stop and remove the running containers use:
 ```
 docker-compose down
 ```
