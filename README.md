@@ -1,4 +1,4 @@
-# GeoDjango
+# DjangoOnDocker
 This repository allows you to quickly set up a development environment for a Django project using Docker. The stack includes:
 - Django (backend)
 - PostgreSQL (database)
